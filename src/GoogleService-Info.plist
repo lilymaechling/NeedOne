@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>261581815542-upsd3adsie4ue2ku36861i9i6gken9dh.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.261581815542-upsd3adsie4ue2ku36861i9i6gken9dh</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBAirKSlBEIGUfvAGTHkHf29OOBjMNdh6s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>261581815542</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.reactnativefirebase</string>
+	<key>PROJECT_ID</key>
+	<string>needone</string>
+	<key>STORAGE_BUCKET</key>
+	<string>needone.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:261581815542:ios:fbcfe6f1420bcc0be0f6d7</string>
+	<key>DATABASE_URL</key>
+	<string>https://needone.firebaseio.com</string>
+</dict>
+</plist>
