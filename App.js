@@ -81,11 +81,10 @@ export default function App() {
 
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(null)
-  const [isSignedIn, setIsSignedIn] = useState(false)
 
   useEffect(() => {
     const usersRef = firebase.firestore().collection('users');
-    console.log("hello")
+    ///console.log("running hook in app.js")
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         usersRef
@@ -110,12 +109,15 @@ export default function App() {
       <ActivityIndicator size="large" />
     )	
   }
-  console.log("user:", user)
+  ///console.log("user:", user)
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        { user !== undefined ? (
-          <Stack.Screen name="Main">
+        { user != null ? (
+          <Stack.Screen 
+            name="Need One"  
+            options={{headerShown:false}}
+          >
             {props => <TabNavigation {...props} extraData={user} />}
           </Stack.Screen>
         ) : (
