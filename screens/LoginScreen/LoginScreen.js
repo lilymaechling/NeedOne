@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
-import { firebase } from '../../firebase/config'
+import { firebase } from '/Users/lilymaechling/Desktop/NeedOne/src/firebase/config.js'
 
 export default function LoginScreen({navigation}) {
     const [email, setEmail] = useState('')
@@ -28,7 +28,6 @@ export default function LoginScreen({navigation}) {
                             return;
                         }
                         const user = firestoreDocument.data()
-                        setUser(user)
                         //navigation.navigate('Home', {user})
                     })
                     .catch(error => {

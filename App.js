@@ -5,15 +5,15 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faHome, faTrophy, faUser, faPlus, faTableTennis  } from '@fortawesome/free-solid-svg-icons'
 
-import HomeScreen from './screens/HomeScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import AddScreen from './screens/AddScreen';
-import LeaderboardScreen from './screens/LeaderboardScreen';
-import NeedOneScreen from './screens/NeedOneScreen';
+import HomeScreen from './screens/HomeScreen/HomeScreen';
+import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
+import AddScreen from './screens/AddScreen/AddScreen';
+import LeaderboardScreen from './screens/LeaderScreen/LeaderboardScreen';
+import NeedOneScreen from './screens/NeedOneScreen/NeedOneScreen';
 
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { LoginScreen, MainScreen, RegistrationScreen } from './src/screens'
+import { LoginScreen, RegistrationScreen } from './screens'
 import { firebase } from './src/firebase/config'
 import {decode, encode} from 'base-64'
 if (!global.btoa) {  global.btoa = encode }
@@ -81,7 +81,7 @@ export default function App() {
 
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(null)
-
+  const [isSignedIn, setIsSignedIn] = useState(false)
 
   useEffect(() => {
     const usersRef = firebase.firestore().collection('users');
@@ -103,18 +103,18 @@ export default function App() {
         setLoading(false)
       }
     });
-  }, []);
+  }, [user]);
 
   if (loading) {	
     return (	
       <ActivityIndicator size="large" />
     )	
   }
-
+  console.log("user:", user)
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        { user ? (
+        { user !== undefined ? (
           <Stack.Screen name="Main">
             {props => <TabNavigation {...props} extraData={user} />}
           </Stack.Screen>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { FlatList, Keyboard, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import styles from './styles';
-import { firebase } from '../../firebase/config'
+import { firebase } from '/Users/lilymaechling/Desktop/NeedOne/src/firebase/config.js'
 
-export default function HomeScreen(props) {
+export default function MainScreen(props) {
 
     const [entityText, setEntityText] = useState('')
     const [entities, setEntities] = useState([])

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { firebase } from '../../firebase/config'
+import { firebase } from '/Users/lilymaechling/Desktop/NeedOne/src/firebase/config.js'
 import styles from './styles';
 
 export default function RegistrationScreen({navigation}) {
