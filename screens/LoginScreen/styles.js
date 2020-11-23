@@ -5,16 +5,6 @@ export default StyleSheet.create({
         flex: 1,
         alignItems: 'center'
     },
-    title: {
-
-    },
-    logo: {
-        flex: 1,
-        height: 120,
-        width: 90,
-        alignSelf: "center",
-        margin: 30
-    },
     input: {
         height: 48,
         borderRadius: 5,
@@ -38,7 +28,7 @@ export default StyleSheet.create({
     },
     buttonTitle: {
         color: 'white',
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: "bold"
     },
     footerView: {
@@ -47,7 +37,7 @@ export default StyleSheet.create({
         marginTop: 20
     },
     footerText: {
-        fontSize: 16,
+        fontSize: 20,
         color: '#2e2e2d'
     },
     footerLink: {

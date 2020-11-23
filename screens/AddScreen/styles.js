@@ -26,6 +26,17 @@ export default StyleSheet.create({
     marginRight: 20,
     paddingLeft: 16,
   },
+  inputMultiLine: {
+    height: 120,
+    width: 370,
+    borderRadius: 5,
+    backgroundColor: 'white',
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    padding: 20,
+  },
   button: {
     backgroundColor: '#00693e',
     marginLeft: 30,
@@ -33,8 +44,15 @@ export default StyleSheet.create({
     marginTop: 20,
     height: 48,
     borderRadius: 5,
+    padding: 10,
+    paddingHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  buttonTitle: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: "bold"
   },
   checkboxContainer: {
     flexDirection: 'row',

@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import {Rating} from 'react-native-ratings';
 import CheckBox from '@react-native-community/checkbox';
 import styles from './styles';
@@ -11,10 +17,13 @@ const AddGameScreen = ({navigation}) => {
   const [T2PLayer2, setT2PLayer2] = useState('');
   const [T1, setT1] = useState(true);
   const [T2, setT2] = useState(false);
+  const [Comments, setComments] = useState('');
 
   const ratingCompleted = (rating) => {
     console.log('Rating is: ' + rating);
   };
+
+  const onSubmitPress = () => {};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -65,7 +74,7 @@ const AddGameScreen = ({navigation}) => {
         </View>
       </View>
       <Text style={styles.title}>Who won?</Text>
-      <View style={{flexDirection: 'row', padding: 10}}>
+      <View style={{flexDirection: 'row', margin: 20}}>
         <View style={{flexDirection: 'row', marginRight: 30}}>
           <CheckBox
             value={T1}
@@ -75,6 +84,8 @@ const AddGameScreen = ({navigation}) => {
             }}
             style={styles.checkbox}
             boxType="square"
+            onCheckColor="#00693e"
+            onTintColor="#00693e"
           />
           <Text style={styles.label}>Team 1</Text>
         </View>
@@ -87,18 +98,36 @@ const AddGameScreen = ({navigation}) => {
             }}
             style={styles.checkbox}
             boxType="square"
+            onCheckColor="#00693e"
+            onTintColor="#00693e"
           />
           <Text style={styles.label}>Team 2</Text>
         </View>
       </View>
       <Text style={styles.title}>Overall Game Rating</Text>
-      <Rating
-        type="star"
-        ratingCount={5}
-        imageSize={60}
-        ratingBackgroundColor="#aaaaaa"
-        onFinishRating={(rating) => ratingCompleted(rating)}
+      <View style={{marginVertical: 20}}>
+        <Rating
+          type="star"
+          ratingCount={5}
+          imageSize={60}
+          ratingBackgroundColor="#aaaaaa"
+          onFinishRating={(rating) => ratingCompleted(rating)}
+          fractions={1}
+          style={{backgroundColor:"#aaaaaa"}}
+        />
+      </View>
+      <Text style={styles.title}>Comments</Text>
+      <TextInput
+        style={styles.inputMultiLine}
+        onChangeText={(text) => setComments(text)}
+        value={Comments}
+        placeholder="Input game comments here."
+        multiline={true}
+        numberOfLines={4}
       />
+      <TouchableOpacity style={styles.button} onPress={() => onSubmitPress()}>
+        <Text style={styles.buttonTitle}>Submit</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

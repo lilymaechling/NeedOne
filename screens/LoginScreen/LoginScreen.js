@@ -41,6 +41,8 @@ export default function LoginScreen({navigation}) {
 
     return (
         <View style={styles.container}>
+            <Image source={require('../../pictures/logo.png')} style={{height:150, width:150, margin:40}}/>
+            <Text style={{fontSize:36, fontWeight:'800', marginBottom: 30}}>Need One</Text>
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">

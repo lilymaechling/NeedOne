@@ -38,7 +38,7 @@ export default StyleSheet.create({
     },
     buttonTitle: {
         color: 'white',
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: "bold"
     },
     footerView: {
@@ -47,7 +47,7 @@ export default StyleSheet.create({
         marginTop: 20
     },
     footerText: {
-        fontSize: 16,
+        fontSize: 20,
         color: '#2e2e2d'
     },
     footerLink: {
