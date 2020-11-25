@@ -22,7 +22,7 @@ if (!global.atob) { global.atob = decode }
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const TabNavigation = () => {
+const TabNavigation = ({extraData}) => {
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -48,13 +48,14 @@ const TabNavigation = () => {
         }}/>
       <Tab.Screen 
         name="Add Game" 
-        component={AddScreen} 
         options={{
           tabBarLabel: 'Add Game',
           tabBarIcon: ({ color, size }) => (
             <FontAwesomeIcon icon={ faPlus } color={color} size={size}/>
           ),
-        }}/>
+        }}>
+        {() => <AddScreen extraData={extraData}/>}
+      </Tab.Screen>
       <Tab.Screen 
         name="NeedOne" 
         component={NeedOneScreen} 
@@ -66,13 +67,14 @@ const TabNavigation = () => {
         }}/>
       <Tab.Screen 
         name="Profile" 
-        component={ProfileScreen}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => (
             <FontAwesomeIcon icon={ faUser } color={color} size={size}/>
           ),
-        }} />
+        }} >
+        {() => <ProfileScreen extraData={extraData}/>}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 };
@@ -109,7 +111,7 @@ export default function App() {
       <ActivityIndicator size="large" />
     )	
   }
-  ///console.log("user:", user)
+  //console.log("user:", user)
   return (
     <NavigationContainer>
       <Stack.Navigator>

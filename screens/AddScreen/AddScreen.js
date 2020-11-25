@@ -1,29 +1,78 @@
-import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View, Text, SafeAreaView, TextInput, TouchableOpacity, Keyboard } from 'react-native';
 import {Rating} from 'react-native-ratings';
 import CheckBox from '@react-native-community/checkbox';
 import styles from './styles';
+import {firebase} from '/Users/lilymaechling/Desktop/NeedOne/src/firebase/config.js';
 
-const AddGameScreen = ({navigation}) => {
-  const [T1PLayer1, setT1PLayer1] = useState('');
+const AddGameScreen = ({navigation, extraData}) => {
+  const userID = extraData.id;
+  const userName = extraData.fullName;
+  const gamesRef = firebase.firestore().collection('games');
+
+  const [games, setGames] = useState([]);
+  const [T1PLayer1, setT1PLayer1] = useState(userName);
   const [T1PLayer2, setT1PLayer2] = useState('');
   const [T2PLayer1, setT2PLayer1] = useState('');
   const [T2PLayer2, setT2PLayer2] = useState('');
   const [T1, setT1] = useState(true);
   const [T2, setT2] = useState(false);
+  const [rating, setRating] = useState(2.5);
   const [Comments, setComments] = useState('');
 
-  const ratingCompleted = (rating) => {
-    console.log('Rating is: ' + rating);
-  };
+  // useEffect(() => {
+  //   gamesRef
+  //     .where('authorID', '==', userID)
+  //     .orderBy('createdAt', 'desc')
+  //     .onSnapshot(
+  //       (querySnapshot) => {
+  //         const newGames = [];
+  //         querySnapshot.forEach((doc) => {
+  //           const game = doc.data();
+  //           game.id = doc.id;
+  //           newGames.push(game);
+  //         });
+  //         setGames(newGames);
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       },
+  //     );
+  // }, []);
 
-  const onSubmitPress = () => {};
+  // console.log('games: ', games);
+
+  const onSubmitPress = () => {
+    if (T1PLayer1 && T1PLayer1.length > 0 && T2PLayer1 && T2PLayer1.length > 0) {
+      const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+      const data = {
+        team1: [T1PLayer1, T1PLayer2],
+        team2: [T2PLayer1, T2PLayer2],
+        rating: rating,
+        outcome: T1,
+        comments: Comments,
+        authorID: userID,
+        createdAt: timestamp,
+      };
+      gamesRef
+        .add(data)
+        .then((_doc) => {
+          setT1PLayer2('');
+          setT2PLayer1('');
+          setT2PLayer2('');
+          setT1(true);
+          setT2(false);
+          setComments('');
+          Keyboard.dismiss();
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
+    else {
+      alert("There must be at least one player on each team.")
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -111,9 +160,9 @@ const AddGameScreen = ({navigation}) => {
           ratingCount={5}
           imageSize={60}
           ratingBackgroundColor="#aaaaaa"
-          onFinishRating={(rating) => ratingCompleted(rating)}
+          onFinishRating={(rating) => setRating(rating)}
           fractions={1}
-          style={{backgroundColor:"#aaaaaa"}}
+          style={{backgroundColor: '#aaaaaa'}}
         />
       </View>
       <Text style={styles.title}>Comments</Text>
