@@ -118,7 +118,7 @@ export default function App() {
         { user != null ? (
           <Stack.Screen 
             name="Need One"  
-            options={{headerShown:false}}
+            options={{headerShown:false, animationEnabled:false}}
           >
             {props => <TabNavigation {...props} extraData={user} />}
           </Stack.Screen>

@@ -16,10 +16,10 @@ const ProfileScreen = ({navigation, extraData}) => {
   const gamesRef = firebase.firestore().collection('games');
 
   const [games, setGames] = useState([]);
+  const [parsedGames, setParsedGames] = useState([]);
 
   useEffect(() => {
     gamesRef
-      //.where('authorID', '==', userID)
       .orderBy('createdAt', 'desc')
       .onSnapshot(
         (querySnapshot) => {
@@ -29,17 +29,48 @@ const ProfileScreen = ({navigation, extraData}) => {
             game.id = doc.id;
             newGames.push(game);
           });
-
           setGames(newGames);
+          parseGames(games);
         },
         (error) => {
           console.log(error);
         },
       );
-  }, []);
+  });
 
-  console.log('games: ', games);
+  //console.log('games: ', games);
 
+  const parseGames = (games) => {
+    const pGames = [];
+    var x = 0;
+    games.forEach((item) => {
+      var data = {};
+      if(item.outcome === true){
+        data = {
+          team1: item.team1,
+          team2: item.team2,
+          date: item.createdAt,
+          outcome: 'Win',
+          key: x.toString(),
+        }
+      } else {
+        data = {
+          team1: item.team1,
+          team2: item.team2,
+          date: item.createdAt,
+          outcome: 'Loss',
+          comments: item.comments,
+          rating: item.rating,
+          key:x.toString(),
+        }
+      }
+      pGames.push(data);
+      x=x+1;
+    })
+    setParsedGames(pGames);
+  }
+
+  //console.log("parsed:", parsedGames)
   const onSignOutPress = () => {
     firebase
       .auth()
@@ -53,23 +84,13 @@ const ProfileScreen = ({navigation, extraData}) => {
       <Text style={styles.title}> Profile Screen </Text>
       <Text style={styles.title}>Welcome, {userName}</Text>
       <FlatList
-        ItemSeparatorComponent={
-          Platform.OS !== 'android' &&
-          (({highlighted}) => (
-            <View style={[style.separator, highlighted && {marginLeft: 0}]} />
-          ))
-        }
-        data={[{title: 'Title Text', key: 'item1'}]}
-        renderItem={({item, index, separators}) => (
-          <TouchableHighlight
-            key={item.key}
-            onPress={() => this._onPress(item)}
-            onShowUnderlay={separators.highlight}
-            onHideUnderlay={separators.unhighlight}>
-            <View style={{backgroundColor: 'white'}}>
-              <Text>{item.title}</Text>
+        data={parsedGames}
+        renderItem={({item, index}) => (
+            <View style={{backgroundColor: 'white', margin:10, alignItems:'center', borderRadius:10, padding:20}}>
+              <Text style={{fontSize:20, fontWeight:'600'}}>{new Date(item.date.toDate()).toDateString()}     {item.outcome}</Text>
+              <Text style={{alignSelf:'flex-start'}}>Team 1: {item.team1}</Text>
+              <Text style={{alignSelf:'flex-start'}}>Team 2: {item.team2}</Text>
             </View>
-          </TouchableHighlight>
         )}
       />
       <TouchableOpacity onPress={() => onSignOutPress()} style={styles.button}>
